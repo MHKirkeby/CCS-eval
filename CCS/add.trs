@@ -1,0 +1,8 @@
+(CONDITIONTYPE ORIENTED)
+(VAR x y z)
+(RULES 
+
+  add(0, y) -> tp(y)
+  add(s(x), y) -> tp(s(z)) | add(x, y) == tp(z)
+)
+(COMMENT )

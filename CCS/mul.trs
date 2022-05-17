@@ -1,0 +1,9 @@
+(CONDITIONTYPE ORIENTED)
+(VAR x y z w)
+(RULES 
+  mul(0, y) -> tp(0)
+  mul(s(x), y) -> tp(z) | mul(x, y) == tp(w) , add(y, w) == tp(z)
+  add(0, y) -> tp(y)
+  add(s(x), y) -> tp(s(z)) | add(x, y) == tp(z)
+)
+(COMMENT )

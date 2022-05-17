@@ -1,0 +1,37 @@
+%token <string> ID
+%token COMMA 
+%token LPAR RPAR LHPAR RHPAR
+%token EOL EOF
+
+
+%start Pend            /* the entry point */
+%type <Pend.Task list> Pend
+%type <Pend.Task list> Tasks
+%type <Pend.Task> Task
+%type <int> Index
+%type <int list> Indexss
+%type <int list> Indexs
+%type <string> Id
+
+%%
+
+Task: LPAR Id COMMA LHPAR Indexs RHPAR COMMA Indexss  RPAR {($2,$5, $8)}
+
+Id: ID   {$1}
+;
+Index: ID			{(Option.valOf (Int.fromString($1)))}
+;
+
+Indexss: LHPAR Indexs RHPAR	{ $2 }
+	 | LHPAR RHPAR 		{[]}
+;
+Indexs: Index			{[$1]}
+      | Index COMMA Indexs	{$1::$3}
+;
+
+Pend:  LHPAR Tasks RHPAR	{$2}
+;
+
+Tasks:   Task		  {[$1]}
+       | Task COMMA Tasks {$1::$3}
+;
